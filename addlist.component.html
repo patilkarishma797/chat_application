@@ -1,0 +1,136 @@
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+        <div class="col-md-4 col-xl-3 chat">
+            <div class="card mb-sm-3 mb-md-0 contacts_card">
+                <div class="card-header">
+                    <div class="icon d-flex">
+                        <div class="heading-name">
+                            <marquee behavior="" direction="">welcome {{loginUserData.name}}</marquee>
+                           
+                      
+                           </div>
+                           <div class="heading-name">
+                            <i class="fa fa-user" (click)="logOut()"></i>
+                        
+                           </div>
+                          
+                    </div></div>
+
+                <div class="card-body contacts_body">    
+                    <ul class="contacts">
+                        <li class="active">
+
+
+                            <div class="d-flex bd-highlight">
+                                <div class="img_cont">
+                                    <!--<img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">-->
+
+
+                                </div>
+                                <div class="user_info" style="margin-left: -5rem;">
+                                    <ng-container *ngFor="let item of students;let i = index">
+                                        <div *ngIf="loginUserData.id != item.id ">
+                                            <img src="https://tse4.mm.bing.net/th?id=OIP.nTK-yAWL01laY6CKjMEq3gHaHa&pid=Api&P=0"
+                                                alt="" class="rounded-circle user_img"> <span
+                                                class="online_icon"></span>
+                                            <h5 class="text-white"  style="display: inline-flex; padding: 2rem;" (click)="onClickChatUser(item)">{{item.data.name}}
+                                            </h5>
+                                            <p *ngIf="selectedChatUser?.data" [ngClass]="selectedChatUser.data?.isOnline?'online':'offline'">
+                                                {{ selectedChatUser.data?.isOnline?'online':'offline' }}</p>
+                                           
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </li>
+                  
+                    </ul>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+        <div class="col-md-8 col-xl-6 chat">
+            <div class="card">
+
+                <div class="card-header msg_head">
+                    <div class="d-flex bd-highlight">
+
+                        <div class="img_cont">
+                            <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg"
+                                class="rounded-circle user_im" width="100%">
+                            <span class="online_icon"></span>
+                        </div>
+                        <div class="user_info" *ngIf="selectedChatUser">
+                            <span>{{selectedChatUser.data.name}}</span>
+                           
+                            <p *ngIf="selectedChatUser?.data" [ngClass]="selectedChatUser.data?.isOnline?'online':'offline'">
+                                {{ selectedChatUser.data?.isOnline?'online':'offline' }}</p>
+                        </div>
+
+                    </div>
+                    <span id="action_menu_btn"><i class="fa fa-ellipsis-v"></i></span>
+                   <!---- <div class="action_menu" *ngIf="!islogin">
+                        <ul>
+                            <li><i class="fa fa-user-circle"></i> View profile</li>
+                            <li><i class="fa fa-users"></i> Add to close friends</li>
+                            <li><i class="fa fa-plus"></i> Add to group</li>
+                            <li><i class="fa fa-ban"></i> Block</li>
+                        </ul>
+                    </div>-->
+                </div>
+                <div class="card-body msg_card_body">
+
+                    <div class="message-chat">
+                        <div class="">
+                               <ng-container *ngFor="let message of removeDuplicates(messages) ;let i=index">
+                                <div class=" sender-msg" *ngIf="message.receiverid == loginUserData.id">
+
+                                    <p class="text-right right msg_time">
+                                        <span class="msg_time">{{message.text}}</span>
+                                        <!-- <span style="color: gray; font-size: 10px;">{{message.date| date:'long'}}</span> -->
+                                    </p>
+                                  </div>
+                                <div class="w-50" *ngIf="message.id == loginUserData.id">
+                                    <p class="text-left  w-100 msg_cotainer_send">
+                                        <span class="msg_cotainer_send">{{message.text}}</span>
+                                            <!-- <span style="color: gray; font-size: 10px;">{{message.date| date:'long'}}</span> -->
+                                    </p> 
+                                </div> 
+                            </ng-container>
+                        </div>          
+                    </div>
+
+                    <div class="msg" *ngIf="islogin">
+                        <div class="fmsg d-flex justify-content-end mb-4">
+
+                            <!-- <ng-container *ngFor="let message of messages;let i=index">
+                                <div class="msg_cotainer right">
+
+                                    <span class="msg_time">{{message.text}}</span>
+                                    <span style="color: gray; font-size: 10px;">{{message.date| date:'long'}}</span>
+
+                                </div>
+                            </ng-container> -->
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text attach_btn"><i class="fa fa-paperclip"></i></span>
+                            </div>
+                            <input name="" class="form-control type_msg" placeholder="Type your message..."
+                                name="message" [(ngModel)]="message" (keydown.enter)="sendMessage()" id="name"
+                                name="name">
+                            <div class="input-group-append">
+
+                                <span class="input-group-text send_btn"><i class="fa  fa-location-arrow"
+                                        (click)="sendMessage()"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
