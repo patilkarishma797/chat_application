@@ -1,0 +1,28 @@
+<div class="container">
+  
+    <form  name="form" >
+    <h2> Register user</h2>
+   
+  
+    <input type="text" id="Name" [(ngModel)]="Name" placeholder="Enter  Name"  name="Name" required
+       minlength="3">
+ 
+    <br>
+    <input type="text" id="number" [(ngModel)]="number"  placeholder="Enter  mobile number"  name="number" required
+    minlength="3">
+    <br>
+    <input type="email" id="Email" [(ngModel)]="Email" name="Email"  placeholder="Enter Your Email" required>
+     <br>
+    <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter Your password"
+       required>
+<br>
+<input type="text" id="cpassword"   [(ngModel)]="cpassword" placeholder="Enter confirm password"  name="cpassword" required
+minlength="3">
+
+   
+    <button type="submit"  class="btn btn-primary" (click)="submit()" >Send</button>
+    <br>
+    <span> <a routerLink="/auth/login">login</a></span>
+   
+    </form>
+ </div>
